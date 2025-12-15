@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cimko Consulting | Strategy Lubricant for Modern Business</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0b1c2c;
+      --slate: #23364a;
+      --sky: #39b6c8;
+      --amber: #f6a800;
+      --sand: #f4f0eb;
+      --card: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.15);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+      color: #e9eef3;
+      background: radial-gradient(circle at 10% 20%, rgba(57, 182, 200, 0.25), transparent 30%),
+                  radial-gradient(circle at 80% 0%, rgba(246, 168, 0, 0.18), transparent 30%),
+                  linear-gradient(135deg, #0b1c2c 0%, #0d2436 100%);
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 28, 44, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--sky), var(--amber));
+      display: grid;
+      place-items: center;
+      color: #0b1c2c;
+      font-weight: 800;
+    }
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 14px;
+    }
+    .nav-links a { opacity: 0.8; transition: opacity 0.2s; }
+    .nav-links a:hover { opacity: 1; }
+    .cta {
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(57, 182, 200, 0.15), rgba(246, 168, 0, 0.15));
+      color: #fff;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); }
+    main { padding: 36px 20px 80px; }
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(57, 182, 200, 0.15);
+      color: #d4f5fb;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+    }
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(32px, 5vw, 46px);
+      margin: 14px 0 14px;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .lead {
+      font-size: 17px;
+      color: #cfd9e5;
+      margin-bottom: 20px;
+      max-width: 600px;
+    }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(120deg, var(--sky), #6bd3e3);
+      color: #0b1c2c;
+      padding: 12px 18px;
+      border-radius: 14px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(57, 182, 200, 0.3); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border 0.2s, transform 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+    .hero-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      min-height: 320px;
+      display: grid;
+      gap: 12px;
+    }
+    .floating {
+      position: absolute;
+      right: -30px;
+      bottom: -30px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, rgba(246, 168, 0, 0.25), transparent 60%);
+      filter: blur(12px);
+    }
+    .mini-kpi {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(11, 28, 44, 0.6);
+      border: 1px solid var(--border);
+      padding: 14px;
+      border-radius: 12px;
+    }
+    .mini-kpi strong { display: block; color: #fff; font-size: 20px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+    }
+    section {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 4px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 28px;
+      margin: 0 0 10px;
+      color: #fff;
+    }
+    .section-lead {
+      color: #cfd9e5;
+      max-width: 720px;
+      margin-bottom: 26px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      min-height: 170px;
+      display: grid;
+      gap: 10px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.25); }
+    .chip {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: #0b1c2c;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--amber), #ffd475);
+    }
+    .chip.blue { background: linear-gradient(135deg, var(--sky), #73d9e7); }
+    .chip.silver { background: linear-gradient(135deg, #bfc7d4, #f4f0eb); color: #0b1c2c; }
+    .card h3 {
+      margin: 0;
+      color: #fff;
+      font-size: 18px;
+    }
+    .muted { color: #cfd9e5; font-size: 15px; line-height: 1.5; }
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .list li {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .badge {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(57, 182, 200, 0.15);
+      color: #d4f5fb;
+      border: 1px solid rgba(57, 182, 200, 0.3);
+      letter-spacing: 0.2px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+    .metric strong { display: block; font-size: 24px; color: #fff; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      background: rgba(11, 28, 44, 0.9);
+      color: #cfd9e5;
+    }
+    footer .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+    .tagline {
+      font-size: 15px;
+      max-width: 320px;
+      line-height: 1.5;
+    }
+    .contact {
+      display: grid;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+    .step {
+      position: relative;
+      padding-left: 40px;
+    }
+    .step::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 6px;
+      height: 100%;
+      width: 2px;
+      background: rgba(255,255,255,0.08);
+    }
+    .step:last-child::before { display: none; }
+    .bullet {
+      position: absolute;
+      left: 8px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky), var(--amber));
+      box-shadow: 0 0 0 4px rgba(57, 182, 200, 0.15);
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(12px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    [data-animate] { animation: floatUp 0.8s ease forwards; opacity: 0; }
+    [data-animate="1"] { animation-delay: 0.05s; }
+    [data-animate="2"] { animation-delay: 0.12s; }
+    [data-animate="3"] { animation-delay: 0.18s; }
+    [data-animate="4"] { animation-delay: 0.24s; }
+    [data-animate="5"] { animation-delay: 0.30s; }
+    @media (max-width: 700px) {
+      .nav { padding: 14px 16px; }
+      .nav-links { display: none; }
+      .hero { gap: 24px; }
+      main { padding: 28px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <div class="logo-mark">C</div>
+        Cimko Consulting
+      </div>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#trust">Trust</a>
+        <a href="#contact" class="cta">Talk with an Expert</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow" data-animate="1">
+          <span class="badge">Strategy lubricant</span>
+          Business, funds & relationships in sync
+        </div>
+        <h1 data-animate="2">Operational clarity for companies moving fast.</h1>
+        <p class="lead" data-animate="3">
+          Cimko Consulting aligns strategy, funds tracking, and customer/bank relationships so leaders can focus on confident growth.
+          We combine academic rigor with seasoned operational know‑how to remove friction from your toughest decisions.
+        </p>
+        <div class="actions" data-animate="4">
+          <button class="btn-primary">Book a discovery call</button>
+          <button class="btn-ghost">Download our capability brief</button>
+        </div>
+      </div>
+      <div class="hero-card" data-animate="3">
+        <div class="pill">Board-ready dashboards</div>
+        <div class="mini-kpi">
+          <div>
+            <small class="muted">Funds visibility</small>
+            <strong>99.2%</strong>
+          </div>
+          <div class="badge">Live controls</div>
+        </div>
+        <div class="mini-kpi">
+          <div>
+            <small class="muted">Customer & bank pulse</small>
+            <strong>Realtime</strong>
+          </div>
+          <div class="badge">Confidence score</div>
+        </div>
+        <div class="mini-kpi">
+          <div>
+            <small class="muted">Process reliability</small>
+            <strong>+34%</strong>
+          </div>
+          <div class="badge">Continuous improvement</div>
+        </div>
+        <div class="floating"></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <h2 class="section-title">Where we remove friction</h2>
+      <p class="section-lead">Integrated management services that blend business science with hands-on execution. Each stream is led by experts who have built, scaled, and stabilized organizations across industries.</p>
+      <div class="grid">
+        <div class="card" data-animate="1">
+          <div class="chip blue">S</div>
+          <h3>Strategy & Operating Models</h3>
+          <p class="muted">Market positioning, scenario planning, and operating models that keep teams aligned as you expand.</p>
+        </div>
+        <div class="card" data-animate="2">
+          <div class="chip">F</div>
+          <h3>Funds Tracking & Governance</h3>
+          <p class="muted">Cash visibility, spend discipline, and governance frameworks that withstand regulator and board scrutiny.</p>
+        </div>
+        <div class="card" data-animate="3">
+          <div class="chip silver">R</div>
+          <h3>Relationship Management</h3>
+          <p class="muted">Customer and bank relationship playbooks backed by data, empathetic service design, and clear escalation paths.</p>
+        </div>
+        <div class="card" data-animate="4">
+          <div class="chip blue">E</div>
+          <h3>Execution Assurance</h3>
+          <p class="muted">Process engineering, SOPs, and training that make strategy durable across teams and time zones.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach" class="two-col">
+      <div>
+        <h2 class="section-title">How Cimko works with you</h2>
+        <p class="section-lead">We blend academic-grade analysis with practical operators who stay until the work holds. Every engagement is designed to de-risk decisions and accelerate confidence.</p>
+        <div class="timeline">
+          <div class="step">
+            <div class="bullet"></div>
+            <h3>Orientation</h3>
+            <p class="muted">90-minute workshop to map goals, constraints, and relationship dynamics between customers and banking partners.</p>
+          </div>
+          <div class="step">
+            <div class="bullet"></div>
+            <h3>Control blueprint</h3>
+            <p class="muted">We design a controls and reporting spine that ties strategy to funds flow, operational KPIs, and risk appetite.</p>
+          </div>
+          <div class="step">
+            <div class="bullet"></div>
+            <h3>Enablement & pilots</h3>
+            <p class="muted">Pilot playbooks with your teams, iterate quickly, and equip leaders with decision-ready dashboards.</p>
+          </div>
+          <div class="step">
+            <div class="bullet"></div>
+            <h3>Scale & coach</h3>
+            <p class="muted">We stay embedded to coach managers, tune processes, and keep relationships healthy as volume increases.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="height:100%;" data-animate="2">
+          <div class="chip blue">A</div>
+          <h3>Advisory snapshot</h3>
+          <p class="muted">A concise, board-friendly report within 15 business days that outlines risks, opportunities, and a prioritized action map.</p>
+          <ul class="list">
+            <li><span class="badge">Processes</span> Maturity, bottlenecks, and the fastest fixes.</li>
+            <li><span class="badge">Funds</span> Liquidity guardrails, burn discipline, cash controls.</li>
+            <li><span class="badge">Relationships</span> Service design, escalation design, and win-back kits.</li>
+            <li><span class="badge">People</span> Capability gaps, coaching plans, and succession moves.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="trust">
+      <h2 class="section-title">Governance you can show your board</h2>
+      <p class="section-lead">We build transparency into every touchpoint. Our tooling and routines make it simple to demonstrate control to auditors, customers, and banking partners.</p>
+      <div class="grid">
+        <div class="card" data-animate="1">
+          <div class="chip silver">1</div>
+          <h3>Funds integrity</h3>
+          <p class="muted">Multi-ledger reconciliation, variance alerts, and quarterly control refreshes to keep funds tracking airtight.</p>
+        </div>
+        <div class="card" data-animate="2">
+          <div class="chip blue">2</div>
+          <h3>Relationship clarity</h3>
+          <p class="muted">Joint scorecards for customer and bank partners with sentiment signals and service-level adherence.</p>
+        </div>
+        <div class="card" data-animate="3">
+          <div class="chip">3</div>
+          <h3>Operational assurance</h3>
+          <p class="muted">SOPs, risk registers, and drills that align teams on how to respond when exceptions occur.</p>
+        </div>
+        <div class="card" data-animate="4">
+          <div class="chip silver">4</div>
+          <h3>Data you can trust</h3>
+          <p class="muted">Secure, audit-friendly dashboards with data lineage and access controls baked in.</p>
+        </div>
+      </div>
+      <div class="metrics" style="margin-top:18px;">
+        <div class="metric"><strong>48 hrs</strong><span class="muted">to first visibility pack</span></div>
+        <div class="metric"><strong>30%</strong><span class="muted">average process speedup</span></div>
+        <div class="metric"><strong>12+</strong><span class="muted">industries supported</span></div>
+        <div class="metric"><strong>Zero</strong><span class="muted">missed audit deadlines</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Leaders choose Cimko for our people</h2>
+      <p class="section-lead">Our consultants combine academic research, enterprise experience, and founder empathy. You get rigor without the bureaucracy.</p>
+      <div class="grid">
+        <div class="card" data-animate="1">
+          <div class="chip">A</div>
+          <h3>Academic depth</h3>
+          <p class="muted">PhDs and lecturers who translate research into practical playbooks your teams can adopt quickly.</p>
+        </div>
+        <div class="card" data-animate="2">
+          <div class="chip blue">O</div>
+          <h3>Operator mindset</h3>
+          <p class="muted">Ex-CXOs and builders who have navigated growth, downturns, and complex bank/customer dynamics.</p>
+        </div>
+        <div class="card" data-animate="3">
+          <div class="chip silver">C</div>
+          <h3>Coaching built in</h3>
+          <p class="muted">We mentor your managers so improvements stick, even after engagements conclude.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="two-col">
+      <div>
+        <h2 class="section-title">Start with a working session</h2>
+        <p class="section-lead">Share your current challenges and we will respond with a tailored agenda within one business day.</p>
+        <ul class="list">
+          <li><span class="badge">Ideal for</span> CEOs, COOs, CFOs, Heads of Customer Experience</li>
+          <li><span class="badge">Format</span> 60-minute remote or on-site workshop</li>
+          <li><span class="badge">Outcome</span> Risks, priorities, and a 4-week action map</li>
+        </ul>
+      </div>
+      <div>
+        <div class="card" data-animate="2">
+          <div class="chip blue">@</div>
+          <h3>Contact Cimko</h3>
+          <div class="contact">
+            <div><strong>Email</strong><br> hello@cimkoconsulting.com</div>
+            <div><strong>Phone</strong><br> +1 (555) 401-2900</div>
+            <div><strong>Offices</strong><br> Lagos · London · Remote-first teams</div>
+            <div><strong>Hours</strong><br> Mon–Fri, 8:00–18:00</div>
+          </div>
+          <button class="btn-primary" style="margin-top:12px;">Schedule my session</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="logo">
+          <div class="logo-mark">C</div>
+          Cimko Consulting
+        </div>
+        <p class="tagline">A strategy lubricant for organizations that need clarity between business intent, funds flow, and the relationships that power growth.</p>
+      </div>
+      <div class="contact">
+        <strong>Get in touch</strong>
+        <span>hello@cimkoconsulting.com</span>
+        <span>+1 (555) 401-2900</span>
+      </div>
+      <div class="contact">
+        <strong>Quick links</strong>
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#trust">Governance</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
